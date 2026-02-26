@@ -1,1 +1,145 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Swing IQ</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin:0;
+    font-family:'Poppins', sans-serif;
+    background: linear-gradient(135deg,#0f172a,#1e293b);
+    color:white;
+}
+
+nav {
+    display:flex;
+    justify-content:space-between;
+    padding:20px 50px;
+}
+
+nav h2 { color:#22c55e; }
+
+nav a {
+    color:white;
+    text-decoration:none;
+    margin-left:20px;
+}
+
+.hero {
+    text-align:center;
+    padding:100px 20px;
+}
+
+.hero h1 {
+    font-size:3.5rem;
+}
+
+.hero span {
+    color:#22c55e;
+}
+
+.hero p {
+    max-width:600px;
+    margin:20px auto;
+    color:#cbd5e1;
+}
+
+.btn {
+    background:#22c55e;
+    padding:15px 35px;
+    border-radius:30px;
+    text-decoration:none;
+    font-weight:bold;
+    color:black;
+}
+
+.section {
+    padding:80px 20px;
+    text-align:center;
+}
+
+.cards {
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:30px;
+    margin-top:40px;
+}
+
+.card {
+    background:#0f172a;
+    padding:30px;
+    width:280px;
+    border-radius:20px;
+    transition:0.3s;
+}
+
+.card:hover {
+    transform:translateY(-10px);
+}
+
+footer {
+    text-align:center;
+    padding:40px;
+    color:#94a3b8;
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <h2>Swing IQ</h2>
+    <div>
+        <a href="#">Funktioner</a>
+        <a href="#">Om oss</a>
+        <a href="#">Kontakt</a>
+    </div>
+</nav>
+
+<div class="hero">
+    <h1>Analysera din <span>sving</span>.  
+    Förstå dina <span>slag</span>.  
+    Spela smartare.</h1>
+
+    <p>Swing IQ använder AI för att analysera din sving, GPS för att spåra dina slag och statistik för att visa var du tappar poäng.</p>
+
+    <a href="#" class="btn">Ladda ner snart</a>
+</div>
+
+<div class="section">
+    <h2>Funktioner</h2>
+
+    <div class="cards">
+        <div class="card">
+            <h3>AI Swing-analys</h3>
+            <p>Spela in din sving och få direkt feedback på tempo, rotation och svingplan.</p>
+        </div>
+
+        <div class="card">
+            <h3>GPS Slagspårning</h3>
+            <p>Se exakt var dina slag landar och identifiera dina vanligaste missar.</p>
+        </div>
+
+        <div class="card">
+            <h3>Statistik & Heatmaps</h3>
+            <p>Upptäck var slagen försvinner och få strategiförslag per hål.</p>
+        </div>
+
+        <div class="card">
+            <h3>Hitta Golfvänner</h3>
+            <p>Matchas med spelare på din nivå och tävla i leaderboard-utmaningar.</p>
+        </div>
+    </div>
+</div>
+
+<footer>
+© 2026 Swing IQ – Train Smart. Play Smarter.
+</footer>
+
+</body>
+</html>
