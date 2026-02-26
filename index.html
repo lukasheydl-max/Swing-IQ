@@ -3,143 +3,215 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Swing IQ</title>
+<title>SwingIQ Dashboard</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
+* { margin:0; padding:0; box-sizing:border-box; }
+
 body {
-    margin:0;
-    font-family:'Poppins', sans-serif;
-    background: linear-gradient(135deg,#0f172a,#1e293b);
+    font-family: 'Inter', sans-serif;
+    background:#0b0f14;
     color:white;
-}
-
-nav {
     display:flex;
-    justify-content:space-between;
-    padding:20px 50px;
+    height:100vh;
 }
 
-nav h2 { color:#22c55e; }
-
-nav a {
-    color:white;
-    text-decoration:none;
-    margin-left:20px;
+/* SIDEBAR */
+.sidebar {
+    width:250px;
+    background:#0f141a;
+    padding:20px;
+    display:flex;
+    flex-direction:column;
 }
 
-.hero {
-    text-align:center;
-    padding:100px 20px;
-}
-
-.hero h1 {
-    font-size:3.5rem;
-}
-
-.hero span {
+.logo {
+    font-size:20px;
+    font-weight:700;
+    margin-bottom:40px;
     color:#22c55e;
 }
 
-.hero p {
-    max-width:600px;
-    margin:20px auto;
-    color:#cbd5e1;
+.nav-item {
+    padding:12px;
+    border-radius:8px;
+    margin-bottom:10px;
+    cursor:pointer;
+    transition:0.2s;
+    color:#aaa;
 }
 
-.btn {
-    background:#22c55e;
-    padding:15px 35px;
-    border-radius:30px;
-    text-decoration:none;
-    font-weight:bold;
-    color:black;
+.nav-item:hover,
+.nav-item.active {
+    background:#16202b;
+    color:#22c55e;
+}
+
+/* MAIN */
+.main {
+    flex:1;
+    padding:40px;
+    overflow:auto;
 }
 
 .section {
-    padding:80px 20px;
-    text-align:center;
+    display:none;
+    animation:fade 0.3s ease-in-out;
 }
 
+.section.active {
+    display:block;
+}
+
+@keyframes fade {
+    from {opacity:0; transform:translateY(10px);}
+    to {opacity:1; transform:translateY(0);}
+}
+
+/* CARDS */
 .cards {
     display:flex;
+    gap:20px;
     flex-wrap:wrap;
-    justify-content:center;
-    gap:30px;
-    margin-top:40px;
+    margin-top:30px;
 }
 
 .card {
-    background:#0f172a;
-    padding:30px;
-    width:280px;
-    border-radius:20px;
+    background:#111827;
+    padding:25px;
+    border-radius:15px;
+    width:250px;
     transition:0.3s;
 }
 
 .card:hover {
-    transform:translateY(-10px);
+    transform:translateY(-5px);
+    background:#1f2937;
 }
 
-footer {
-    text-align:center;
-    padding:40px;
-    color:#94a3b8;
+.button {
+    margin-top:15px;
+    padding:8px 15px;
+    background:#22c55e;
+    border:none;
+    border-radius:20px;
+    cursor:pointer;
+    font-weight:600;
 }
 </style>
 </head>
 
 <body>
 
-<nav>
-    <h2>Swing IQ</h2>
-    <div>
-        <a href="#">Funktioner</a>
-        <a href="#">Om oss</a>
-        <a href="#">Kontakt</a>
-    </div>
-</nav>
+<div class="sidebar">
+    <div class="logo">SwingIQ</div>
 
-<div class="hero">
-    <h1>Analysera din <span>sving</span>.  
-    Förstå dina <span>slag</span>.  
-    Spela smartare.</h1>
-
-    <p>Swing IQ använder AI för att analysera din sving, GPS för att spåra dina slag och statistik för att visa var du tappar poäng.</p>
-
-    <a href="#" class="btn">Ladda ner snart</a>
+    <div class="nav-item active" onclick="showSection('dashboard', this)">Dashboard</div>
+    <div class="nav-item" onclick="showSection('swing', this)">Swing</div>
+    <div class="nav-item" onclick="showSection('banor', this)">Banor</div>
+    <div class="nav-item" onclick="showSection('spelare', this)">Hitta Spelare</div>
+    <div class="nav-item" onclick="showSection('statistik', this)">Statistik</div>
 </div>
 
-<div class="section">
-    <h2>Funktioner</h2>
+<div class="main">
 
-    <div class="cards">
-        <div class="card">
-            <h3>AI Swing-analys</h3>
-            <p>Spela in din sving och få direkt feedback på tempo, rotation och svingplan.</p>
-        </div>
+    <!-- DASHBOARD -->
+    <div id="dashboard" class="section active">
+        <h1>Välkommen tillbaka 👋</h1>
+        <p>Här är din översikt</p>
 
-        <div class="card">
-            <h3>GPS Slagspårning</h3>
-            <p>Se exakt var dina slag landar och identifiera dina vanligaste missar.</p>
-        </div>
+        <div class="cards">
+            <div class="card">
+                <h3>Analysera Swing</h3>
+                <p>Spela in och analysera din sving.</p>
+                <button class="button" onclick="alert('Startar AI-analys...')">Starta</button>
+            </div>
 
-        <div class="card">
-            <h3>Statistik & Heatmaps</h3>
-            <p>Upptäck var slagen försvinner och få strategiförslag per hål.</p>
-        </div>
+            <div class="card">
+                <h3>Ny Rond</h3>
+                <p>Registrera en ny golfrond.</p>
+                <button class="button" onclick="alert('Ny rond skapad!')">Starta</button>
+            </div>
 
-        <div class="card">
-            <h3>Hitta Golfvänner</h3>
-            <p>Matchas med spelare på din nivå och tävla i leaderboard-utmaningar.</p>
+            <div class="card">
+                <h3>Hitta Spelare</h3>
+                <p>Matcha med golfvänner.</p>
+                <button class="button" onclick="alert('Söker spelare nära dig...')">Starta</button>
+            </div>
         </div>
     </div>
+
+    <!-- SWING -->
+    <div id="swing" class="section">
+        <h1>Swing Analys</h1>
+        <p>Ladda upp video för AI-analys.</p>
+        <button class="button" onclick="fakeAnalysis()">Ladda upp video</button>
+        <p id="analysisResult" style="margin-top:20px;"></p>
+    </div>
+
+    <!-- BANOR -->
+    <div id="banor" class="section">
+        <h1>Banor</h1>
+        <p>Se dina mest spelade banor och statistik.</p>
+    </div>
+
+    <!-- SPELARE -->
+    <div id="spelare" class="section">
+        <h1>Hitta Spelare</h1>
+        <p>Matchar med spelare på din nivå...</p>
+    </div>
+
+    <!-- STATISTIK -->
+    <div id="statistik" class="section">
+        <h1>Din Statistik</h1>
+        <div class="cards">
+            <div class="card">
+                <h3>Fairway %</h3>
+                <p>67%</p>
+            </div>
+            <div class="card">
+                <h3>GIR %</h3>
+                <p>54%</p>
+            </div>
+            <div class="card">
+                <h3>Putts/Rond</h3>
+                <p>31</p>
+            </div>
+        </div>
+    </div>
+
 </div>
 
-<footer>
-© 2026 Swing IQ – Train Smart. Play Smarter.
-</footer>
+<script>
+function showSection(id, element) {
+    document.querySelectorAll('.section').forEach(sec => {
+        sec.classList.remove('active');
+    });
+
+    document.querySelectorAll('.nav-item').forEach(nav => {
+        nav.classList.remove('active');
+    });
+
+    document.getElementById(id).classList.add('active');
+    element.classList.add('active');
+}
+
+function fakeAnalysis() {
+    let result = document.getElementById("analysisResult");
+    result.innerHTML = "Analyserar sving...";
+    
+    setTimeout(() => {
+        result.innerHTML = `
+        Tempo: 3.1<br>
+        Svingplan: 92%<br>
+        Rotation: Bra<br>
+        Rekommendation: Minska överrotering i toppen.
+        `;
+    }, 2000);
+}
+</script>
 
 </body>
 </html>
