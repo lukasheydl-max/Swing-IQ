@@ -1,217 +1,192 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SwingIQ Dashboard</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Swing IQ</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      display: flex;
+      height: 100vh;
+    }
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    /* Sidebar */
+    .sidebar {
+      width: 200px;
+      background-color: #2c3e50;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+    }
 
-<style>
-* { margin:0; padding:0; box-sizing:border-box; }
+    .sidebar h2 {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
 
-body {
-    font-family: 'Inter', sans-serif;
-    background:#0b0f14;
-    color:white;
-    display:flex;
-    height:100vh;
-}
+    .sidebar button {
+      margin: 5px 0;
+      padding: 10px;
+      border: none;
+      background-color: #34495e;
+      color: white;
+      cursor: pointer;
+      text-align: left;
+    }
 
-/* SIDEBAR */
-.sidebar {
-    width:250px;
-    background:#0f141a;
-    padding:20px;
-    display:flex;
-    flex-direction:column;
-}
+    .sidebar button:hover {
+      background-color: #1abc9c;
+    }
 
-.logo {
-    font-size:20px;
-    font-weight:700;
-    margin-bottom:40px;
-    color:#22c55e;
-}
+    /* Main content */
+    .main-content {
+      flex: 1;
+      padding: 20px;
+      background-color: #ecf0f1;
+      overflow-y: auto;
+    }
 
-.nav-item {
-    padding:12px;
-    border-radius:8px;
-    margin-bottom:10px;
-    cursor:pointer;
-    transition:0.2s;
-    color:#aaa;
-}
+    .tab {
+      display: none;
+    }
 
-.nav-item:hover,
-.nav-item.active {
-    background:#16202b;
-    color:#22c55e;
-}
+    .tab.active {
+      display: block;
+    }
 
-/* MAIN */
-.main {
-    flex:1;
-    padding:40px;
-    overflow:auto;
-}
+    h1 {
+      margin-top: 0;
+    }
 
-.section {
-    display:none;
-    animation:fade 0.3s ease-in-out;
-}
+    /* Simple form styling */
+    input, select, button {
+      padding: 5px;
+      margin: 5px 0;
+    }
 
-.section.active {
-    display:block;
-}
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
 
-@keyframes fade {
-    from {opacity:0; transform:translateY(10px);}
-    to {opacity:1; transform:translateY(0);}
-}
-
-/* CARDS */
-.cards {
-    display:flex;
-    gap:20px;
-    flex-wrap:wrap;
-    margin-top:30px;
-}
-
-.card {
-    background:#111827;
-    padding:25px;
-    border-radius:15px;
-    width:250px;
-    transition:0.3s;
-}
-
-.card:hover {
-    transform:translateY(-5px);
-    background:#1f2937;
-}
-
-.button {
-    margin-top:15px;
-    padding:8px 15px;
-    background:#22c55e;
-    border:none;
-    border-radius:20px;
-    cursor:pointer;
-    font-weight:600;
-}
-</style>
+    th, td {
+      border: 1px solid #bdc3c7;
+      padding: 5px;
+      text-align: center;
+    }
+  </style>
 </head>
-
 <body>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2>Välkommen tillbaka!</h2>
+    <button onclick="showTab('hem')">Hem</button>
+    <button onclick="showTab('analysera')">Analysera sving</button>
+    <button onclick="showTab('nyRond')">Ny rond</button>
+    <button onclick="showTab('bananalys')">Bananalys</button>
+    <button onclick="showTab('statistik')">Statistik</button>
+    <button onclick="showTab('hittaSpelare')">Hitta spelare</button>
+  </div>
 
-<div class="sidebar">
-    <div class="logo">SwingIQ</div>
-
-    <div class="nav-item active" onclick="showSection('dashboard', this)">Dashboard</div>
-    <div class="nav-item" onclick="showSection('swing', this)">Swing</div>
-    <div class="nav-item" onclick="showSection('banor', this)">Banor</div>
-    <div class="nav-item" onclick="showSection('spelare', this)">Hitta Spelare</div>
-    <div class="nav-item" onclick="showSection('statistik', this)">Statistik</div>
-</div>
-
-<div class="main">
-
-    <!-- DASHBOARD -->
-    <div id="dashboard" class="section active">
-        <h1>Välkommen tillbaka 👋</h1>
-        <p>Här är din översikt</p>
-
-        <div class="cards">
-            <div class="card">
-                <h3>Analysera Swing</h3>
-                <p>Spela in och analysera din sving.</p>
-                <button class="button" onclick="alert('Startar AI-analys...')">Starta</button>
-            </div>
-
-            <div class="card">
-                <h3>Ny Rond</h3>
-                <p>Registrera en ny golfrond.</p>
-                <button class="button" onclick="alert('Ny rond skapad!')">Starta</button>
-            </div>
-
-            <div class="card">
-                <h3>Hitta Spelare</h3>
-                <p>Matcha med golfvänner.</p>
-                <button class="button" onclick="alert('Söker spelare nära dig...')">Starta</button>
-            </div>
-        </div>
+  <!-- Main content -->
+  <div class="main-content">
+    <!-- Hem -->
+    <div id="hem" class="tab active">
+      <h1>Hem</h1>
+      <p>Välj vad du vill göra från menyn till vänster.</p>
     </div>
 
-    <!-- SWING -->
-    <div id="swing" class="section">
-        <h1>Swing Analys</h1>
-        <p>Ladda upp video för AI-analys.</p>
-        <button class="button" onclick="fakeAnalysis()">Ladda upp video</button>
-        <p id="analysisResult" style="margin-top:20px;"></p>
+    <!-- Analysera sving -->
+    <div id="analysera" class="tab">
+      <h1>Analysera sving</h1>
+      <p>Här kan du analysera din sving (funktionalitet att lägga till senare).</p>
     </div>
 
-    <!-- BANOR -->
-    <div id="banor" class="section">
-        <h1>Banor</h1>
-        <p>Se dina mest spelade banor och statistik.</p>
+    <!-- Ny rond -->
+    <div id="nyRond" class="tab">
+      <h1>Ny rond</h1>
+      <form id="nyRondForm">
+        <label>Välj golfklubb:</label>
+        <select id="golfklubb">
+          <option value="bro">Bro Banan</option>
+          <option value="vasby">Väsby Golfklubb</option>
+          <!-- Här kan du lägga in fler klubbar från databas -->
+        </select>
+        <br>
+        <label>Datum:</label>
+        <input type="date" id="datum">
+        <br>
+        <label>Väder:</label>
+        <input type="text" id="vader" placeholder="Ex. Soligt, 18°C">
+        <br>
+        <button type="button" onclick="startRond()">Starta rond</button>
+      </form>
+      <div id="rondData"></div>
     </div>
 
-    <!-- SPELARE -->
-    <div id="spelare" class="section">
-        <h1>Hitta Spelare</h1>
-        <p>Matchar med spelare på din nivå...</p>
+    <!-- Bananalys -->
+    <div id="bananalys" class="tab">
+      <h1>Bananalys</h1>
+      <p>Medelresultat: <span id="medelresultat">-</span></p>
+      <p>Bästa rond: <span id="bastaRond">-</span></p>
+      <p>Svåraste hål: <span id="svarasteHal">-</span></p>
+      <p>Klubbanvändning: <span id="klubbanvandning">-</span></p>
     </div>
 
-    <!-- STATISTIK -->
-    <div id="statistik" class="section">
-        <h1>Din Statistik</h1>
-        <div class="cards">
-            <div class="card">
-                <h3>Fairway %</h3>
-                <p>67%</p>
-            </div>
-            <div class="card">
-                <h3>GIR %</h3>
-                <p>54%</p>
-            </div>
-            <div class="card">
-                <h3>Putts/Rond</h3>
-                <p>31</p>
-            </div>
-        </div>
+    <!-- Statistik -->
+    <div id="statistik" class="tab">
+      <h1>Statistik</h1>
+      <p>Medelresultat: <span id="statMedel">-</span></p>
+      <p>Bästa rond: <span id="statBasta">-</span></p>
+      <p>Rundor spelade: <span id="rundorSpelade">-</span></p>
+      <p>Procent i fairway: <span id="fairwayPct">-</span></p>
+      <p>GIR, putts, par eller bättre: <span id="girPutts">-</span></p>
     </div>
 
-</div>
+    <!-- Hitta spelare -->
+    <div id="hittaSpelare" class="tab">
+      <h1>Hitta spelare</h1>
+      <form>
+        <label>Golfklubb:</label>
+        <select>
+          <option>Bro Banan</option>
+          <option>Väsby Golfklubb</option>
+        </select>
+        <br>
+        <label>Nivå:</label>
+        <select>
+          <option>Nybörjare</option>
+          <option>Medel</option>
+          <option>Avancerad</option>
+        </select>
+        <br>
+        <button type="button">Sök spelare</button>
+        <button type="button">Lägg till spelare</button>
+      </form>
+    </div>
+  </div>
 
-<script>
-function showSection(id, element) {
-    document.querySelectorAll('.section').forEach(sec => {
-        sec.classList.remove('active');
-    });
+  <script>
+    function showTab(tabId) {
+      document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+    }
 
-    document.querySelectorAll('.nav-item').forEach(nav => {
-        nav.classList.remove('active');
-    });
+    function startRond(){
+      const klubb = document.getElementById('golfklubb').value;
+      const datum = document.getElementById('datum').value;
+      const vader = document.getElementById('vader').value;
 
-    document.getElementById(id).classList.add('active');
-    element.classList.add('active');
-}
-
-function fakeAnalysis() {
-    let result = document.getElementById("analysisResult");
-    result.innerHTML = "Analyserar sving...";
-    
-    setTimeout(() => {
-        result.innerHTML = `
-        Tempo: 3.1<br>
-        Svingplan: 92%<br>
-        Rotation: Bra<br>
-        Rekommendation: Minska överrotering i toppen.
-        `;
-    }, 2000);
-}
-</script>
-
+      document.getElementById('rondData').innerHTML = `
+        <h3>Rondinformation</h3>
+        <p>Golfklubb: ${klubb}</p>
+        <pVäder: ${vader}</p>
+        <p>Här kan du börja registrera slag per hål (funktionalitet senare).</p>
+      `;
+    }
+  </script>
 </body>
 </html>
